@@ -24,7 +24,15 @@ public class Persona implements Serializable {
     
     private String nombre;
     private String apellido;
-    private int conectado;
+    private boolean conectado;
+
+    public boolean isConectado() {
+        return conectado;
+    }
+
+    public void setConectado(boolean conectado) {
+        this.conectado = conectado;
+    }
     
     
     public Persona() {
@@ -57,7 +65,7 @@ public class Persona implements Serializable {
      
     @Override
     public String toString() {
-        return "Usuario{" + "id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + '}';
+        return "Usuario{" + "id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + "Boleando="+conectado+'}';
     
     }
     

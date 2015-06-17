@@ -33,6 +33,7 @@ public class JPALabo {
         nuevoPersona.setId(1);
         nuevoPersona.setNombre("Pablo");
         nuevoPersona.setApellido("Lopez");
+        nuevoPersona.setConectado(true);
      //   Persona nuevoUsuario2 = new Persona();
    //     nuevoUsuario2.setId(2);
       //  nuevoUsuario2.setNombre("Andres");
@@ -56,6 +57,7 @@ public class JPALabo {
         
         personas = controladorPersona.findPersonaEntities();
         ModeloTablaPersona mTabla = new ModeloTablaPersona(personas);
+        
         Principal p = new Principal(mTabla);
         p.setVisible(true);
         personas.stream().forEach((_item) -> {
