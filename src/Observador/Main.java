@@ -16,7 +16,7 @@ public class Main {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        Sujeto sujeto = new Jpa();
+        Sujeto sujeto = Jpa.getJpa();
         Observador observador1= new ClI(sujeto);   
         Observador observador2= new UI1(sujeto);
           
