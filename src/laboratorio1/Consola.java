@@ -5,13 +5,16 @@
  */
 package laboratorio1;
 
+
+import Observador.AgregarDato;
 import static Observador.AgregarDato.id1;
+import static Observador.AgregarDato.label1;
 import static Observador.AgregarDato.sujeto;
 import Observador.ClI;
 import Observador.Jpa;
 import Observador.Observador;
 import Observador.Sujeto;
-import Observador.UI1;
+//import Observador.UI1;
 import java.util.Scanner;
 import persistence.Persona;
 
@@ -20,13 +23,29 @@ import persistence.Persona;
  *
  * @author Pablito Garzona
  */
-public class Consola {
+public class Consola implements Observador {
+    
+    
+    
+       public Consola(Sujeto sujeto) {
+        this.sujeto = sujeto;
+                
+        main(null);
+        
+        
+        
+    }
+    public static Sujeto sujeto;
+     public static int id1;
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        
+        
+        
         String status;
         String status1= new String("conectado");
         String status2= new String("no conectado");
@@ -77,6 +96,11 @@ public class Consola {
         
          */
          
+    }
+
+    @Override
+    public void actualizar() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }
