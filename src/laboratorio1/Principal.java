@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package laboratorio1;
-
+import javax.swing.table.TableModel;
 /**
  *
  * @author systemroot
@@ -14,8 +14,10 @@ public class Principal extends javax.swing.JFrame {
     /**
      * Creates new form Principal
      */
-    public Principal() {
+    public Principal(TableModel modelo) {
         initComponents();
+        setLocationRelativeto(null);
+        
     }
 
     Principal(ModeloTablaPersona mTabla) {
@@ -99,7 +101,7 @@ public class Principal extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Principal().setVisible(true);
+                new Principal(null).setVisible(true);
             }
         });
     }
@@ -108,4 +110,8 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tabla1;
     // End of variables declaration//GEN-END:variables
+
+    private void setLocationRelativeto(Object object) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

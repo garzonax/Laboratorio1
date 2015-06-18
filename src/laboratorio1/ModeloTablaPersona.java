@@ -13,8 +13,7 @@ import persistence.Persona;
  *
  * @author systemroot
  */
-class ModeloTablaPersona extends AbstractTableModel{
-    
+public class ModeloTablaPersona extends AbstractTableModel{
     private List<Persona> personas;
     private String columnas[] = {"Nombre", "Apellido", "Conectado"};
 
@@ -39,6 +38,7 @@ class ModeloTablaPersona extends AbstractTableModel{
         switch(columnIndex){
             case 0: return usr.getNombre();
             case 1: return usr.getApellido();
+            case 2: return usr.isConectado();
            // case 2: return usr.getEdad();
             default: return null;
         }
@@ -62,9 +62,12 @@ class ModeloTablaPersona extends AbstractTableModel{
             case 1: 
                 personas.get(rowIndex).setApellido((String)aValue);
                 break;
+                
+           // case 2: 
+            //    personas.get(rowIndex).isConectado((String)aValue);
             //case 2: 
             //    personas.get(rowIndex).setEdad((int)aValue);
-           //     break;
+           //  break;
             default:
                 break;
                 
