@@ -28,7 +28,8 @@ public class Jpa implements Sujeto  {
     EntityManagerFactory emf;
     EntityManager em;
     PersonaJpaController controladorPersona;
-    public Jpa() {
+    public static Jpa Jpa;
+    private public Jpa() {
         personas = new ArrayList<Persona>();
         Observadores = new ArrayList<Observador>();
         emf = Persistence.createEntityManagerFactory("JPATestPU");
@@ -36,7 +37,14 @@ public class Jpa implements Sujeto  {
         controladorPersona = new PersonaJpaController(emf);
 
     }
-
+    public static void getJpa(){
+        
+        if(this.Jpa==null){
+            Jpa=new Jpa();
+            
+        }
+        return this.Jpa;
+    }
     
     @Override
     public int getEstado(){
