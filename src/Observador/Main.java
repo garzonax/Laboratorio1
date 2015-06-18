@@ -19,11 +19,11 @@ public class Main {
         Sujeto sujeto = new Jpa();
         Observador observador1= new ClI(sujeto);   
         Observador observador2= new UI1(sujeto);
+          
         
         sujeto.registrarObservador(observador1);
         sujeto.registrarObservador(observador2);
         
-        System.out.println("exito");
         
     }
     
