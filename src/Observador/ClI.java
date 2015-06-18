@@ -5,6 +5,9 @@
  */
 package Observador;
 
+import java.util.List;
+import persistence.Persona;
+
 /**
  *
  * @author Diaz
@@ -31,7 +34,13 @@ public class ClI implements Observador{
 
     @Override
     public void actualizar() {
-        System.out.println("conexion");
+        List<Persona> persona=sujeto.getPersonas();
+      
+        System.out.println("--------------------Actualizacion de Datos---------------------");
+        for(Persona p:persona){
+            System.out.println(p);
+        }
+        System.out.println("----------------------------------------------------------------");
     }
     
 }

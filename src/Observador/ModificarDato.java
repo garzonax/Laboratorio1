@@ -6,21 +6,23 @@
 package Observador;
 
 import static Observador.ClI.main;
+import java.awt.event.KeyEvent;
+import javax.swing.JOptionPane;
 import persistence.Persona;
 
 /**
  *
  * @author Diaz
  */
-public class AgregarDato extends javax.swing.JFrame implements Observador{
+public class ModificarDato extends javax.swing.JFrame implements Observador{
 
     /**
      * Creates new form AgregarDato
      */
-    public AgregarDato() {
+    public ModificarDato() {
         initComponents();
     }
-    public AgregarDato(Sujeto sujeto) {
+    public ModificarDato(Sujeto sujeto) {
         this.sujeto = sujeto;
                 
         main(null);
@@ -46,7 +48,9 @@ public class AgregarDato extends javax.swing.JFrame implements Observador{
         label2 = new javax.swing.JLabel();
         label3 = new javax.swing.JLabel();
         Boton1 = new javax.swing.JButton();
-        label1 = new javax.swing.JLabel();
+        texto3 = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        label4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -75,7 +79,13 @@ public class AgregarDato extends javax.swing.JFrame implements Observador{
             }
         });
 
-        label1.setText("jLabel3");
+        texto3.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                texto3KeyPressed(evt);
+            }
+        });
+
+        jLabel1.setText("Id");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -94,23 +104,29 @@ public class AgregarDato extends javax.swing.JFrame implements Observador{
                             .addComponent(RadioBoton1)
                             .addGap(18, 18, 18)
                             .addComponent(RadioBoton2)))
+                    .addComponent(Boton1)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(label2)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(label2)
+                            .addComponent(jLabel1))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(texto1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(Boton1))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(label4, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(texto3)
+                                .addComponent(texto1, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)))))
                 .addContainerGap(50, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(label1)
-                .addGap(64, 64, 64))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addComponent(label1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                .addContainerGap(22, Short.MAX_VALUE)
+                .addComponent(label4, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(texto3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(texto1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(label2))
@@ -133,7 +149,7 @@ public class AgregarDato extends javax.swing.JFrame implements Observador{
     private void Boton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton1ActionPerformed
         // TODO add your handling code here:
         Persona p= new Persona();
-        p.setId(id1);
+        p.setId(Integer.parseInt(texto3.getText()));
         p.setNombre(texto1.getText());
         p.setApellido(texto2.getText());
         if(RadioBoton1.isSelected()){
@@ -142,7 +158,7 @@ public class AgregarDato extends javax.swing.JFrame implements Observador{
         if(RadioBoton2.isSelected()){
             p.setConectado(false); 
         }
-        sujeto.Ingresar(p);
+        sujeto.Modificar(p);
         
     }//GEN-LAST:event_Boton1ActionPerformed
 
@@ -159,6 +175,43 @@ public class AgregarDato extends javax.swing.JFrame implements Observador{
             RadioBoton1.setSelected(false);
         }
     }//GEN-LAST:event_RadioBoton2ActionPerformed
+
+    private void texto3KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_texto3KeyPressed
+        // TODO add your handling code here:
+        int k = (int) evt.getKeyChar();//k = al valor de la tecla presionada
+        boolean bool=true;
+
+        if (k >= 97 && k <= 122 || k >= 65 && k <= 90) {//Si el caracter ingresado es una letra
+            evt.setKeyChar((char) KeyEvent.VK_CLEAR);//Limpiar el caracter ingresado
+            JOptionPane.showMessageDialog(null, "No puede ingresar letras!!!", "Validando Datos",
+                    JOptionPane.ERROR_MESSAGE);
+            texto3.setText("");
+            texto3.requestFocus();
+            bool=false;
+        }
+
+        if (k == 241 || k == 209) {//Si el caracter ingresado es una letra
+            evt.setKeyChar((char) KeyEvent.VK_CLEAR);//Limpiar el caracter ingresado
+            JOptionPane.showMessageDialog(null, "No puede ingresar letras!!!", "Validando Datos",
+                    JOptionPane.ERROR_MESSAGE);
+            texto3.setText("");
+            texto3.requestFocus();
+            bool=false;
+        }
+        
+        if(bool&&texto3.getText().compareTo("")!=0){
+            
+        int n=Integer.parseInt(texto3.getText());
+        
+        if(n>sujeto.getEstado()&&n<0){
+            JOptionPane.showMessageDialog(null, "No existe el id!!!", "INVALIDO",
+                    JOptionPane.ERROR_MESSAGE);
+            texto3.setText("");
+            texto3.requestFocus();
+            
+        }
+        }
+    }//GEN-LAST:event_texto3KeyPressed
 
     /**
      * @param args the command line arguments
@@ -177,25 +230,26 @@ public class AgregarDato extends javax.swing.JFrame implements Observador{
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AgregarDato.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ModificarDato.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AgregarDato.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ModificarDato.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AgregarDato.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ModificarDato.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AgregarDato.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ModificarDato.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AgregarDato().setVisible(true);
+                new ModificarDato().setVisible(true);
                 int id = sujeto.getEstado() + 1;
                 id1 = id;
 
                 String n = id + "";
-                label1.setText(n);
+                
             }
         });
     }
@@ -204,11 +258,13 @@ public class AgregarDato extends javax.swing.JFrame implements Observador{
     private javax.swing.JButton Boton1;
     private javax.swing.JRadioButton RadioBoton1;
     private javax.swing.JRadioButton RadioBoton2;
-    public static javax.swing.JLabel label1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel label2;
     private javax.swing.JLabel label3;
+    private javax.swing.JLabel label4;
     private javax.swing.JTextField texto1;
     private javax.swing.JTextField texto2;
+    private javax.swing.JTextField texto3;
     // End of variables declaration//GEN-END:variables
 
     @Override
@@ -217,6 +273,5 @@ public class AgregarDato extends javax.swing.JFrame implements Observador{
                 id1 = id;
 
                 String n = id + "";
-                label1.setText(n);
     }
 }

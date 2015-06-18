@@ -6,6 +6,7 @@
 package Observador;
 
 import static Observador.ClI.sujeto;
+import laboratorio1.ModeloTablaPersona;
 
 /**
  *
@@ -21,10 +22,11 @@ public class UI1 extends javax.swing.JFrame implements Observador{
     }
     public UI1(Sujeto Sujeto) {
          initComponents();
-        this.Sujeto=Sujeto;
+         this.Sujeto = Sujeto;
+        
         main(null);
     }
-    Sujeto Sujeto;
+    public static Sujeto Sujeto;
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -34,16 +36,14 @@ public class UI1 extends javax.swing.JFrame implements Observador{
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        label1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jButton2 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        label1.setText("ESTADO");
-
-        jButton1.setText("Conexion");
+        jButton1.setText("Agregar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -63,15 +63,22 @@ public class UI1 extends javax.swing.JFrame implements Observador{
         ));
         jScrollPane1.setViewportView(jTable1);
 
+        jButton2.setText("Modificar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(label1)
-                .addGap(65, 65, 65)
+                .addGap(126, 126, 126)
                 .addComponent(jButton1)
+                .addGap(39, 39, 39)
+                .addComponent(jButton2)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -83,8 +90,8 @@ public class UI1 extends javax.swing.JFrame implements Observador{
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(label1)
-                    .addComponent(jButton1))
+                    .addComponent(jButton1)
+                    .addComponent(jButton2))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -95,9 +102,17 @@ public class UI1 extends javax.swing.JFrame implements Observador{
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-         sujeto.notificar();
+         Observador nuevo = new AgregarDato(sujeto);
+         sujeto.registrarObservador(nuevo);
+         
         
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+         Observador nuevo = new ModificarDato(sujeto);
+         sujeto.registrarObservador(nuevo);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -130,19 +145,23 @@ public class UI1 extends javax.swing.JFrame implements Observador{
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new UI1().setVisible(true);
+                
+                ModeloTablaPersona mTabla = new ModeloTablaPersona(Sujeto.getPersonas());
+                jTable1.setModel(mTabla);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    public static javax.swing.JLabel label1;
+    public static javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 
     @Override
     public void actualizar() {
-        label1.setText("CONECTADO");
+        ModeloTablaPersona mTabla = new ModeloTablaPersona(Sujeto.getPersonas());
+        jTable1.setModel(mTabla);
     }
 }

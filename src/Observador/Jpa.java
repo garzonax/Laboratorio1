@@ -38,12 +38,13 @@ public class Jpa implements Sujeto  {
     }
 
     
-    
-    public void getEstado(){
-        notificar();
+    @Override
+    public int getEstado(){
+       return controladorPersona.getPersonaCount();
         
     }
-    public void setEstado(Persona persona){
+    @Override
+    public void Ingresar(Persona persona){
         try {
             controladorPersona.create(persona);
         } catch (Exception ex) {
@@ -52,9 +53,7 @@ public class Jpa implements Sujeto  {
         notificar();
         
     }
-    public int getid(){
-       return controladorPersona.getPersonaCount();
-    }
+    
 
     @Override
     public void registrarObservador(Observador p) {
@@ -68,6 +67,21 @@ public class Jpa implements Sujeto  {
             Observadores.get(x).actualizar();
         }
 
+    }
+
+    @Override
+    public List<Persona> getPersonas() {
+        return controladorPersona.findPersonaEntities();
+    }
+
+    @Override
+    public void Modificar(Persona persona) {
+        try {
+            controladorPersona.edit(persona);
+            notificar();
+        } catch (Exception ex) {
+            Logger.getLogger(Jpa.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
         

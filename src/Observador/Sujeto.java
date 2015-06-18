@@ -16,5 +16,9 @@ public interface Sujeto {
     
     public void registrarObservador(Observador p);
     public void notificar();
+    public void Ingresar(Persona persona);
+    public void Modificar(Persona persona);
+    public int getEstado();
+    public List<Persona> getPersonas();
     
 }

@@ -65,7 +65,7 @@ public class Persona implements Serializable {
      
     @Override
     public String toString() {
-        return "Usuario{" + "id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + "Boleando="+conectado+'}';
+        return "Usuario{" + "id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", Conectado="+conectado+'}';
     
     }
     
