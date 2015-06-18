@@ -21,6 +21,7 @@ public class Principal extends javax.swing.JFrame {
     }
 
     Principal(ModeloTablaPersona mTabla) {
+             initComponents();
        tabla1.setModel(mTabla);
     }
 
